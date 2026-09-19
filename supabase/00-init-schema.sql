@@ -1,23 +1,46 @@
 -- ============================================================================
--- Políticas de seguridad (Row Level Security) para el foro de LuvysArchive.
+-- Setup inicial para un proyecto de Supabase nuevo (LuvysArchive).
 --
--- CÓMO APLICARLO:
--- 1. Entra a tu proyecto en supabase.com → SQL Editor → New query.
--- 2. Pega todo este archivo y dale a "Run".
--- 3. Repite (una sola vez) cada vez que crees una tabla nueva relacionada con el foro.
---
--- Sin estas políticas, cualquier usuario autenticado podría editar o borrar
--- publicaciones y likes ajenos llamando directamente a la API de Supabase,
--- sin pasar por la interfaz web (la interfaz ya oculta esos botones, pero eso
--- no es seguridad real — la seguridad real vive aquí, en la base de datos).
+-- CÓMO APLICARLO: Supabase → SQL Editor → New query → pega TODO este
+-- archivo → Run. Es la única migración que hace falta correr en un
+-- proyecto recién creado (ya incluye lo que en IanTBuild se hizo en
+-- varios pasos sueltos).
 -- ============================================================================
 
--- 1) Activar RLS en las tablas (si no estaba ya activo)
+-- 1) Tablas del foro de la comunidad
+create table if not exists public.community_posts (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  image_url text not null,
+  instagram_handle text,
+  instagram_url text,
+  category text,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.post_likes (
+  id uuid primary key default gen_random_uuid(),
+  post_id uuid not null references public.community_posts(id) on delete cascade,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  created_at timestamptz not null default now(),
+  unique (post_id, user_id)
+);
+
+-- 2) Perfiles: por ahora solo la foto de avatar de cada usuario (el handle
+-- se sigue "prestando" de sus propias publicaciones, no hay tabla de
+-- perfiles públicos con más datos).
+create table if not exists public.profiles (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  avatar_url text,
+  updated_at timestamptz not null default now()
+);
+
+-- 3) Row Level Security
 alter table public.community_posts enable row level security;
 alter table public.post_likes enable row level security;
+alter table public.profiles enable row level security;
 
--- 2) community_posts: cualquiera puede leer, pero solo el dueño puede
---    insertar/editar/borrar SUS propias publicaciones.
 drop policy if exists "community_posts_select_all" on public.community_posts;
 create policy "community_posts_select_all"
   on public.community_posts for select
@@ -39,9 +62,6 @@ create policy "community_posts_delete_own"
   on public.community_posts for delete
   using (auth.uid() = user_id);
 
--- 3) post_likes: cualquiera puede leer (para contar likes), pero solo puedes
---    crear/borrar TUS propios likes (no puedes dar like en nombre de otro
---    usuario, ni borrar el like de otra persona).
 drop policy if exists "post_likes_select_all" on public.post_likes;
 create policy "post_likes_select_all"
   on public.post_likes for select
@@ -57,12 +77,26 @@ create policy "post_likes_delete_own"
   on public.post_likes for delete
   using (auth.uid() = user_id);
 
+drop policy if exists "profiles_select_all" on public.profiles;
+create policy "profiles_select_all"
+  on public.profiles for select
+  using (true);
+
+drop policy if exists "profiles_insert_own" on public.profiles;
+create policy "profiles_insert_own"
+  on public.profiles for insert
+  with check (auth.uid() = user_id);
+
+drop policy if exists "profiles_update_own" on public.profiles;
+create policy "profiles_update_own"
+  on public.profiles for update
+  using (auth.uid() = user_id)
+  with check (auth.uid() = user_id);
+
 -- ============================================================================
--- 4) Storage (bucket "foro-fotos"): cualquiera puede ver las fotos, pero solo
---    usuarios autenticados pueden subir, y solo pueden borrar lo que ellos
---    mismos subieron (Supabase guarda el owner del archivo automáticamente).
---    Esto se configura en Storage → Policies (o aquí, vía SQL, contra
---    storage.objects).
+-- 4) Storage: los buckets "galeria" y "foro-fotos" hay que crearlos a mano
+-- (Storage → New bucket → marcar "Public"), estas políticas asumen que ya
+-- existen con esos nombres exactos.
 -- ============================================================================
 drop policy if exists "foro_fotos_select_all" on storage.objects;
 create policy "foro_fotos_select_all"
@@ -79,22 +113,13 @@ create policy "foro_fotos_delete_own"
   on storage.objects for delete
   using (bucket_id = 'foro-fotos' and auth.uid() = owner);
 
--- ============================================================================
--- 5) Storage (bucket "galeria"): la galería principal de la portada. Solo
---    lectura pública — nadie puede subir ni borrar con la clave pública de
---    la web; tú subes las fotos directamente desde el panel de Supabase
---    (Storage → galeria), que usa tu sesión de administrador, no esta clave.
---    Sin esta política, la web puede ver cada foto por su URL directa, pero
---    no puede "listar" qué archivos hay — por eso la galería aparecía vacía.
--- ============================================================================
 drop policy if exists "galeria_select_all" on storage.objects;
 create policy "galeria_select_all"
   on storage.objects for select
   using (bucket_id = 'galeria');
 
 -- ============================================================================
--- 6) (Opcional, recomendado) Activa Realtime para que el feed del foro se
---    actualice en vivo para todos los visitantes sin recargar la página:
---    Database → Replication → activa "community_posts" y "post_likes".
---    La web ya está preparada para aprovechar esto en cuanto lo actives.
+-- 5) (Opcional, recomendado) Activa Realtime para que el feed del foro se
+-- actualice en vivo: Database → Replication → activa "community_posts" y
+-- "post_likes".
 -- ============================================================================
