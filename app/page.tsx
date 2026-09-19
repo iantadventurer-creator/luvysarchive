@@ -348,7 +348,7 @@ export default function Home() {
       nav: { gallery: 'Galería', community: 'Comunidad', about: 'Sobre mí', cta: 'Instagram', menu: 'Abrir menú' },
       hero: {
         badge: 'Fotografía de muñecas',
-        title: 'Cada mueca, una historia de terror con estilo.',
+        title: 'Cada muñeca, una historia de terror con estilo.',
         description: 'Escenarios construidos a mano, iluminación cinematográfica y un ojo obsesionado con el detalle. Bienvenida al set de @luvy.dolls.',
         btnExplore: 'Ver la galería',
         stat1: 'Fotos publicadas',
