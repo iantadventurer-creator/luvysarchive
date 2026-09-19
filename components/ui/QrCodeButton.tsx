@@ -96,10 +96,6 @@ export function QrCodeModal({
   const logoSize = PX * 0.2;
   const logoX = (PX - logoSize) / 2;
   const logoY = (PX - logoSize) / 2;
-  const studR = logoSize * 0.14;
-  const cx1 = logoX + logoSize * 0.32;
-  const cx2 = logoX + logoSize * 0.68;
-  const cy = logoY + logoSize * 0.5;
 
   if (!mounted) return null;
 
@@ -162,10 +158,16 @@ export function QrCodeModal({
                     );
                   })
                 )}
-                <rect x={logoX} y={logoY} width={logoSize} height={logoSize} rx={logoSize * 0.22} fill={color.shadow} />
-                <rect x={logoX} y={logoY - logoSize * 0.06} width={logoSize} height={logoSize} rx={logoSize * 0.22} fill={color.accent} />
-                <circle cx={cx1} cy={cy - logoSize * 0.06} r={studR} fill="#ffffff" opacity={0.55} />
-                <circle cx={cx2} cy={cy - logoSize * 0.06} r={studR} fill="#ffffff" opacity={0.55} />
+                <rect x={logoX} y={logoY} width={logoSize} height={logoSize} rx={logoSize * 0.22} fill={color.accent} />
+                <g transform={`translate(${logoX}, ${logoY}) scale(${logoSize / 36})`}>
+                  <path
+                    d="M18 6.5c-5.8 0-9.5 4-9.5 8.8 0 3.1 1.5 5.4 3.6 7v3.2c0 .9.7 1.6 1.6 1.6h.8v1.4c0 .7.6 1.3 1.3 1.3h.4c.7 0 1.3-.6 1.3-1.3v-1.4h1v1.4c0 .7.6 1.3 1.3 1.3h.4c.7 0 1.3-.6 1.3-1.3v-1.4h.8c.9 0 1.6-.7 1.6-1.6v-3.2c2.1-1.6 3.6-3.9 3.6-7 0-4.8-3.7-8.8-9.5-8.8z"
+                    fill={INK}
+                  />
+                  <circle cx="14.2" cy="15.5" r="2.4" fill={color.accent} />
+                  <circle cx="21.8" cy="15.5" r="2.4" fill={color.accent} />
+                  <path d="M18 17.2l1.3 2.6h-2.6z" fill={color.accent} />
+                </g>
               </svg>
             </div>
 
