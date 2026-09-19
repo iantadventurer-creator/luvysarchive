@@ -457,7 +457,7 @@ export default function Home() {
               </svg>
             </div>
             <div className="leading-none">
-              <span className="font-display font-semibold text-base tracking-tight text-[var(--color-text)] block">LuvysArchive</span>
+              <span className="font-spooky text-lg tracking-tight text-[var(--color-text)] block">LuvysArchive</span>
               <span className="text-[10px] text-[var(--color-accent)] font-semibold tracking-[0.2em] uppercase">Studio</span>
             </div>
           </a>
@@ -554,7 +554,7 @@ export default function Home() {
             {t.hero.badge}
           </motion.div>
 
-          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" transition={{ delay: 0.05 }} className="font-display text-4xl md:text-6xl font-semibold tracking-tight text-[var(--color-text)] mb-6 leading-[1.05]">
+          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" transition={{ delay: 0.05 }} className="font-spooky text-4xl md:text-6xl tracking-tight text-[var(--color-text)] mb-6 leading-[1.1]">
             {t.hero.title}
           </motion.h1>
           <motion.p variants={fadeUp} initial="hidden" animate="visible" transition={{ delay: 0.1 }} className="text-[var(--color-text-muted)] text-base md:text-lg max-w-lg mb-10 leading-relaxed">
@@ -619,7 +619,7 @@ export default function Home() {
         />
         <div className="mb-12 flex flex-col items-center text-center gap-6">
           <div>
-            <motion.h2 initial={{ opacity: 0, y: -10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-[var(--color-text)]">
+            <motion.h2 initial={{ opacity: 0, y: -10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-spooky text-3xl md:text-4xl tracking-tight text-[var(--color-text)]">
               {t.gallery.title}
             </motion.h2>
             <p className="text-sm text-[var(--color-text-muted)] mt-1">{t.gallery.subtitle}</p>

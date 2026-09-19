@@ -2,9 +2,11 @@ import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import { Space_Grotesk } from "next/font/google";
 import { Fredoka } from "next/font/google";
+import { Creepster } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { FilmGrainOverlay } from "@/components/ui/FilmGrainOverlay";
+import { BackgroundSkullField } from "@/components/ui/BackgroundSkullField";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,6 +24,14 @@ const fredoka = Fredoka({
   variable: "--font-fredoka",
   subsets: ["latin"],
   weight: ["500", "600", "700"],
+});
+
+// Creepster: la típica tipografía "de terror de caricatura" — reservada solo
+// para titulares grandes (logo, hero), nunca para texto chico o de lectura.
+const creepster = Creepster({
+  variable: "--font-creepster",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -61,9 +71,10 @@ export default function RootLayout({
     <html
       lang="es"
       data-scroll-behavior="smooth"
-      className={`${geistSans.variable} ${spaceGrotesk.variable} ${fredoka.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${spaceGrotesk.variable} ${fredoka.variable} ${creepster.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[var(--color-ink)] text-[var(--color-text)]">
+        <BackgroundSkullField />
         {children}
         <FilmGrainOverlay />
         <Analytics />

@@ -555,7 +555,7 @@ export default function ComunidadPage() {
 
             <div className="max-w-2xl mx-auto px-4 pt-12">
                 <div className="mb-10 text-center">
-                    <h1 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-[var(--color-text)]">{t.pageTitle}</h1>
+                    <h1 className="font-spooky text-3xl md:text-4xl tracking-tight text-[var(--color-text)]">{t.pageTitle}</h1>
                     <p className="text-sm text-[var(--color-text-muted)] mt-1">{t.pageSubtitle}</p>
                 </div>
 
