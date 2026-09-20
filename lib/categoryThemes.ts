@@ -5,8 +5,8 @@
 export type CategoryTheme = { accent: string; shadow: string; ink: string };
 
 export const CATEGORY_THEMES: Record<string, CategoryTheme> = {
-  'monster high': { accent: '#D8B4E2', shadow: '#B98FC7', ink: '#5b3a5c' },
-  'mirror mi': { accent: '#B8E0F5', shadow: '#8EC7E8', ink: '#345b6e' },
+  'monster high': { accent: '#D8B4E2', shadow: '#9B5FB0', ink: '#5b3a5c' },
+  'mirror mi': { accent: '#B8E0F5', shadow: '#4E93C2', ink: '#345b6e' },
 };
 
 /** Claves en minúscula, en el orden en que se muestran los selectores/filtros. */
