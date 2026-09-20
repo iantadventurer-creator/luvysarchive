@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { GallerySkeleton } from '@/components/ui/GallerySkeleton';
 import { StudDivider } from '@/components/ui/StudDivider';
-import { HeartIcon } from '@/components/ui/HeartIcon';
+import { SwirlHeartIcon } from '@/components/ui/SwirlHeartIcon';
 import { QrCodeModal, pickRandomQrColor } from '@/components/ui/QrCodeButton';
 import { FilterPill } from '@/components/ui/FilterPill';
 import { supabase } from '@/lib/supabaseClient';
@@ -351,18 +351,18 @@ export default function Home() {
   const content = {
     es: {
       nav: { gallery: 'Galería', community: 'Comunidad', about: 'Sobre mí', cta: 'Instagram', menu: 'Abrir menú' },
-      reelsTitle: '🎀 En movimiento',
+      reelsTitle: 'En movimiento',
       hero: {
-        badge: '✨ Diario de una coleccionista',
-        title: 'Cada muñeca guarda su propio cuento de hadas.',
-        description: 'Escenarios tejidos a mano, luz de atardecer y un poquito de magia en cada detalle. Bienvenida a mi rincón, @luvy.dolls.',
+        badge: 'Fotografía y colección',
+        title: 'Cada muñeca, una escena propia.',
+        description: 'Escenarios elaborados a mano, luz cuidada y atención al detalle. Bienvenida a mi espacio, @luvy.dolls.',
         btnExplore: 'Ver la galería',
         stat1: 'Fotos publicadas',
         stat2: 'Universo',
       },
       gallery: {
-        title: 'Un rincón de ensueño',
-        subtitle: 'Cada escena nace de lazos, luz suave y muchísima dedicación.',
+        title: 'La colección',
+        subtitle: 'Escenas construidas con dedicación, luz cuidada y atención al detalle.',
         filterAll: 'Todo',
         favorites: 'Favoritos',
         noResults: 'Todavía no marcaste ninguna foto como favorita.',
@@ -373,8 +373,8 @@ export default function Home() {
       },
       aboutSection: {
         eyebrow: 'Detrás del lente',
-        title: 'De coleccionista a soñadora con cámara',
-        desc: '"Colecciono muñecas desde niña, y ahora las fotografío para regalarles pequeños cuentos propios."',
+        title: 'De coleccionista a fotógrafa',
+        desc: '"Colecciono muñecas desde hace años, y ahora las fotografío para darles una historia propia."',
         cta: 'Seguir en Instagram',
         ctaTiktok: 'Seguir en TikTok',
       },
@@ -389,7 +389,7 @@ export default function Home() {
         removeFavorite: 'Quitar de favoritos',
       },
       footer: {
-        tagline: 'Un rincón dulce para fotos de muñecas y pequeños sueños.',
+        tagline: 'Portafolio de fotografía de muñecas y pequeñas escenas.',
         linksTitle: 'Explorar',
         followTitle: 'Seguir',
         qrLabel: 'Código QR',
@@ -398,18 +398,18 @@ export default function Home() {
     },
     en: {
       nav: { gallery: 'Gallery', community: 'Community', about: 'About', cta: 'Instagram', menu: 'Open menu' },
-      reelsTitle: '🎀 In motion',
+      reelsTitle: 'In motion',
       hero: {
-        badge: '✨ A collector’s diary',
-        title: 'Every doll keeps her own little fairy tale.',
-        description: 'Hand-woven scenes, sunset light, and a touch of magic in every detail. Welcome to my corner, @luvy.dolls.',
+        badge: 'Photography and collecting',
+        title: 'Every doll, a scene of her own.',
+        description: 'Hand-built scenes, careful lighting, and attention to detail. Welcome to my space, @luvy.dolls.',
         btnExplore: 'View gallery',
         stat1: 'Photos published',
         stat2: 'Universe',
       },
       gallery: {
-        title: 'A dreamy little corner',
-        subtitle: 'Every scene is born from ribbons, soft light, and a lot of love.',
+        title: 'The collection',
+        subtitle: 'Scenes built with care, thoughtful lighting, and attention to detail.',
         filterAll: 'All',
         favorites: 'Favorites',
         noResults: "You haven't favorited any photos yet.",
@@ -420,8 +420,8 @@ export default function Home() {
       },
       aboutSection: {
         eyebrow: 'Behind the lens',
-        title: 'From collector to camera-dreamer',
-        desc: '"I’ve collected dolls since I was little, and now I photograph them to give them tiny stories of their own."',
+        title: 'From collector to photographer',
+        desc: '"I’ve collected dolls for years, and now I photograph them to give each one a story of its own."',
         cta: 'Follow on Instagram',
         ctaTiktok: 'Follow on TikTok',
       },
@@ -436,7 +436,7 @@ export default function Home() {
         removeFavorite: 'Remove from favorites',
       },
       footer: {
-        tagline: 'A sweet little corner for doll photos and small dreams.',
+        tagline: 'A doll photography and small-scene portfolio.',
         linksTitle: 'Explore',
         followTitle: 'Follow',
         qrLabel: 'QR code',
@@ -840,7 +840,7 @@ export default function Home() {
                   aria-label={t.modal.prev}
                   className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 text-white border border-white/20 backdrop-blur-sm hover:bg-black/70 transition-colors disabled:opacity-0 disabled:pointer-events-none"
                 >
-                  <HeartIcon className="w-5 h-5" />
+                  <SwirlHeartIcon className="w-6 h-6 rotate-90" />
                 </button>
                 <button
                   onClick={goToNext}
@@ -848,7 +848,7 @@ export default function Home() {
                   aria-label={t.modal.next}
                   className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 text-white border border-white/20 backdrop-blur-sm hover:bg-black/70 transition-colors disabled:opacity-0 disabled:pointer-events-none"
                 >
-                  <HeartIcon className="w-5 h-5" />
+                  <SwirlHeartIcon className="w-6 h-6 -rotate-90" />
                 </button>
                 {!selectedItem.videoUrl && !zoomed && (
                   <div

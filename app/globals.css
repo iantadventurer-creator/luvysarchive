@@ -17,18 +17,18 @@
   --color-text-muted: #a98bae;
   --color-text-faint: #c9afd1;
 
-  /* Acentos — paleta pastel: rosa, lavanda, menta, coral */
-  --color-accent: #ffafcf;    /* Rosa pastel — color principal */
-  --color-accent-2: #ff9aa2; /* Coral pastel — borrar/errores */
-  --color-accent-3: #c3b1e1;  /* Lavanda pastel */
-  --color-accent-4: #b5ead7;  /* Menta pastel */
+  /* Acentos — paleta pastel más apagada, tipo jardín vintage */
+  --color-accent: #e8a0b4;    /* Rosa empolvado — color principal */
+  --color-accent-2: #d97a66; /* Terracota — borrar/errores */
+  --color-accent-3: #8fb4d9;  /* Azul empolvado */
+  --color-accent-4: #a8c4a2;  /* Verde salvia */
   --color-accent-ink: #6b4c6e; /* texto sobre el acento principal (oscuro, para contraste sobre pastel) */
 
   /* Sombra "de canto" de cada acento, para el efecto de placa/sticker */
-  --shadow-accent: #f48fb1;
-  --shadow-accent-2: #f4777f;
-  --shadow-accent-3: #a78bc9;
-  --shadow-accent-4: #8fd9be;
+  --shadow-accent: #c97a91;
+  --shadow-accent-2: #b8543f;
+  --shadow-accent-3: #5f8cb8;
+  --shadow-accent-4: #7fa378;
 }
 
 :root {
