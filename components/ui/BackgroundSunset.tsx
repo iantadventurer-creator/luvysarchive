@@ -58,7 +58,7 @@ export function BackgroundSunset() {
             <div
                 className="absolute inset-0"
                 style={{
-                    background: 'linear-gradient(180deg, #a9c9ec 0%, #b9d6f2 32%, #d9e9f8 62%, #f3f8fd 100%)',
+                    background: 'linear-gradient(180deg, #7ba7d4 0%, #a9c9ec 25%, #f0b8d0 55%, #ffb385 80%, #ffd9a0 100%)',
                 }}
             />
             {/* Nubes: óvalos suaves y difuminados */}
