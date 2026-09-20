@@ -2,15 +2,35 @@
 
 import { motion } from 'framer-motion';
 
+// Dos "cortinas" de estrellitas corriendo por los bordes izquierdo y
+// derecho, como un marco — no unas pocas sueltas por el medio.
 const STARS = [
-    { top: '8%', left: '10%', size: 10, delay: 0 },
-    { top: '14%', left: '82%', size: 7, delay: 0.6 },
-    { top: '22%', left: '40%', size: 6, delay: 1.1 },
-    { top: '5%', left: '58%', size: 8, delay: 1.7 },
-    { top: '30%', left: '90%', size: 6, delay: 0.3 },
-    { top: '38%', left: '6%', size: 7, delay: 2.1 },
-    { top: '60%', left: '88%', size: 8, delay: 0.9 },
-    { top: '70%', left: '4%', size: 6, delay: 1.4 },
+    // Borde izquierdo
+    { top: '4%', left: '3%', size: 8, delay: 0 },
+    { top: '10%', left: '9%', size: 6, delay: 0.8 },
+    { top: '17%', left: '4%', size: 10, delay: 1.5 },
+    { top: '25%', left: '8%', size: 6, delay: 0.4 },
+    { top: '33%', left: '3%', size: 7, delay: 2.0 },
+    { top: '41%', left: '7%', size: 9, delay: 1.1 },
+    { top: '50%', left: '3%', size: 6, delay: 0.2 },
+    { top: '58%', left: '9%', size: 8, delay: 1.7 },
+    { top: '67%', left: '4%', size: 6, delay: 0.9 },
+    { top: '76%', left: '8%', size: 9, delay: 2.3 },
+    { top: '85%', left: '3%', size: 7, delay: 0.6 },
+    { top: '94%', left: '7%', size: 6, delay: 1.3 },
+    // Borde derecho
+    { top: '6%', left: '92%', size: 7, delay: 0.5 },
+    { top: '13%', left: '96%', size: 9, delay: 1.9 },
+    { top: '21%', left: '91%', size: 6, delay: 0.3 },
+    { top: '29%', left: '95%', size: 8, delay: 1.2 },
+    { top: '38%', left: '92%', size: 6, delay: 2.1 },
+    { top: '46%', left: '96%', size: 10, delay: 0.7 },
+    { top: '55%', left: '91%', size: 6, delay: 1.6 },
+    { top: '63%', left: '95%', size: 8, delay: 0.1 },
+    { top: '72%', left: '92%', size: 6, delay: 1.4 },
+    { top: '81%', left: '96%', size: 9, delay: 2.4 },
+    { top: '90%', left: '91%', size: 7, delay: 0.8 },
+    { top: '97%', left: '95%', size: 6, delay: 1.0 },
 ];
 
 function Star({ top, left, size, delay }: { top: string; left: string; size: number; delay: number }) {
