@@ -4,13 +4,13 @@ import { ImageResponse } from 'next/og';
 // Facebook, Discord, etc. Se genera en el momento del build (no en cada
 // visita), así que no afecta el rendimiento del sitio.
 
-export const alt = 'LuvysArchive — Fotografía de muñecas Monster High';
+export const alt = 'LuvysArchive — Fotografía de muñecas';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-const ACCENT = '#E0245E';
-const ACCENT_SHADOW = '#8a1638';
-const STRIPE_COLORS = ['#E0245E', '#F2A93B', '#39E639', '#22C1D6'];
+const ACCENT = '#FFAFCF';
+const ACCENT_SHADOW = '#F48FB1';
+const STRIPE_COLORS = ['#FFAFCF', '#C3B1E1', '#B5EAD7', '#FFD3B0'];
 
 export default function Image() {
   return new ImageResponse(
@@ -23,7 +23,7 @@ export default function Image() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          background: '#05070c',
+          background: 'linear-gradient(180deg, #cdb8ea 0%, #f2b8d6 35%, #ffcdb0 70%, #ffe6c9 100%)',
           position: 'relative',
         }}
       >
@@ -35,7 +35,7 @@ export default function Image() {
             width: 420,
             height: 420,
             borderRadius: '50%',
-            background: 'rgba(0,108,183,0.18)',
+            background: 'rgba(255,255,255,0.35)',
             display: 'flex',
           }}
         />
@@ -47,7 +47,7 @@ export default function Image() {
             width: 380,
             height: 380,
             borderRadius: '50%',
-            background: 'rgba(179,56,44,0.2)',
+            background: 'rgba(255,255,255,0.3)',
             display: 'flex',
           }}
         />
@@ -65,17 +65,19 @@ export default function Image() {
             marginBottom: 40,
           }}
         >
-          <div style={{ display: 'flex', gap: 14 }}>
-            <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#05070c', display: 'flex' }} />
-            <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#05070c', display: 'flex' }} />
-          </div>
+          <svg width="60" height="60" viewBox="0 0 36 36">
+            <path
+              d="M18 29.5C10 24 5.5 19 5.5 13.2 5.5 9 8.8 5.8 12.8 5.8c2.4 0 4.6 1.2 5.2 3.4.6-2.2 2.8-3.4 5.2-3.4 4 0 7.3 3.2 7.3 7.4 0 5.8-4.5 10.8-12.5 16.3z"
+              fill="#6b4c6e"
+            />
+          </svg>
         </div>
 
-        <div style={{ display: 'flex', fontSize: 92, fontWeight: 700, color: '#f5f7fb', letterSpacing: -2 }}>
+        <div style={{ display: 'flex', fontSize: 92, fontWeight: 700, color: '#6b4c6e', letterSpacing: -2 }}>
           LuvysArchive
         </div>
-        <div style={{ display: 'flex', fontSize: 34, color: '#8c99b8', marginTop: 18 }}>
-          Fotografía de muñecas Monster High
+        <div style={{ display: 'flex', fontSize: 34, color: '#8a6b8d', marginTop: 18 }}>
+          Fotografía de muñecas, con mucho corazón
         </div>
 
         <div style={{ display: 'flex', position: 'absolute', bottom: 0, left: 0, right: 0, height: 16 }}>

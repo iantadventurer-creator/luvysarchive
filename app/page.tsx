@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { GallerySkeleton } from '@/components/ui/GallerySkeleton';
 import { StudDivider } from '@/components/ui/StudDivider';
+import { HeartIcon } from '@/components/ui/HeartIcon';
 import { QrCodeModal, pickRandomQrColor } from '@/components/ui/QrCodeButton';
 import { FilterPill } from '@/components/ui/FilterPill';
 import { supabase } from '@/lib/supabaseClient';
@@ -301,6 +302,10 @@ export default function Home() {
     });
   }, [feedItems, filterCategory, showOnlyFavorites, favorites]);
 
+  // Tira de reels: los videos del feed, autoreproduciéndose antes de entrar
+  // al universo de fotos — independiente del filtro de categoría activo.
+  const reelItems = useMemo(() => feedItems.filter((item) => item.mediaType === 'VIDEO'), [feedItems]);
+
   // Vuelve a la página 1 cuando cambia el filtro de favoritos (si no, se
   // podría quedar en una página que ya no existe para el nuevo filtro).
   useEffect(() => {
@@ -346,17 +351,18 @@ export default function Home() {
   const content = {
     es: {
       nav: { gallery: 'Galería', community: 'Comunidad', about: 'Sobre mí', cta: 'Instagram', menu: 'Abrir menú' },
+      reelsTitle: '🎀 En movimiento',
       hero: {
-        badge: 'Fotografía de muñecas',
-        title: 'Cada muñeca, una historia de terror con estilo.',
-        description: 'Escenarios construidos a mano, iluminación cinematográfica y un ojo obsesionado con el detalle. Bienvenida al set de @luvy.dolls.',
+        badge: '✨ Diario de una coleccionista',
+        title: 'Cada muñeca guarda su propio cuento de hadas.',
+        description: 'Escenarios tejidos a mano, luz de atardecer y un poquito de magia en cada detalle. Bienvenida a mi rincón, @luvy.dolls.',
         btnExplore: 'Ver la galería',
         stat1: 'Fotos publicadas',
         stat2: 'Universo',
       },
       gallery: {
-        title: 'Universo creado',
-        subtitle: 'Cada escena es un set construido desde cero: muñecas, luz y paciencia.',
+        title: 'Un rincón de ensueño',
+        subtitle: 'Cada escena nace de lazos, luz suave y muchísima dedicación.',
         filterAll: 'Todo',
         favorites: 'Favoritos',
         noResults: 'Todavía no marcaste ninguna foto como favorita.',
@@ -367,9 +373,10 @@ export default function Home() {
       },
       aboutSection: {
         eyebrow: 'Detrás del lente',
-        title: 'De fan de Monster High a fotógrafa de sets',
-        desc: '"Coleccionista de Monster High desde niña. Ahora uso la fotografía para que mis muñecas cobren vida en sus propios escenarios."',
+        title: 'De coleccionista a soñadora con cámara',
+        desc: '"Colecciono muñecas desde niña, y ahora las fotografío para regalarles pequeños cuentos propios."',
         cta: 'Seguir en Instagram',
+        ctaTiktok: 'Seguir en TikTok',
       },
       modal: {
         viewOnIg: 'Ver en Instagram',
@@ -382,26 +389,27 @@ export default function Home() {
         removeFavorite: 'Quitar de favoritos',
       },
       footer: {
-        tagline: 'Un portafolio inmersivo de fotografía de muñecas Monster High.',
+        tagline: 'Un rincón dulce para fotos de muñecas y pequeños sueños.',
         linksTitle: 'Explorar',
         followTitle: 'Seguir',
         qrLabel: 'Código QR',
       },
-      disclaimer: 'Monster High® es una marca registrada de Mattel, que no patrocina ni respalda este sitio web.',
+      disclaimer: 'Monster High® es una marca registrada de Mattel. Este es un espacio de fan, sin fines comerciales ni patrocinio de la marca.',
     },
     en: {
       nav: { gallery: 'Gallery', community: 'Community', about: 'About', cta: 'Instagram', menu: 'Open menu' },
+      reelsTitle: '🎀 In motion',
       hero: {
-        badge: 'Doll photography',
-        title: 'Every scare, a story with style.',
-        description: 'Hand-built scenes, cinematic lighting, and an eye obsessed with detail. Welcome to the set of @luvy.dolls.',
+        badge: '✨ A collector’s diary',
+        title: 'Every doll keeps her own little fairy tale.',
+        description: 'Hand-woven scenes, sunset light, and a touch of magic in every detail. Welcome to my corner, @luvy.dolls.',
         btnExplore: 'View gallery',
         stat1: 'Photos published',
         stat2: 'Universe',
       },
       gallery: {
-        title: 'Crafted universe',
-        subtitle: 'Every scene is a set built from scratch: dolls, light, and patience.',
+        title: 'A dreamy little corner',
+        subtitle: 'Every scene is born from ribbons, soft light, and a lot of love.',
         filterAll: 'All',
         favorites: 'Favorites',
         noResults: "You haven't favorited any photos yet.",
@@ -412,9 +420,10 @@ export default function Home() {
       },
       aboutSection: {
         eyebrow: 'Behind the lens',
-        title: 'From Monster High fan to set photographer',
-        desc: 'Every shot combines advanced lighting techniques, meticulous set building, and a passion for capturing the perfect personality of each doll.',
+        title: 'From collector to camera-dreamer',
+        desc: '"I’ve collected dolls since I was little, and now I photograph them to give them tiny stories of their own."',
         cta: 'Follow on Instagram',
+        ctaTiktok: 'Follow on TikTok',
       },
       modal: {
         viewOnIg: 'View on Instagram',
@@ -427,12 +436,12 @@ export default function Home() {
         removeFavorite: 'Remove from favorites',
       },
       footer: {
-        tagline: 'An immersive Monster High doll photography portfolio.',
+        tagline: 'A sweet little corner for doll photos and small dreams.',
         linksTitle: 'Explore',
         followTitle: 'Follow',
         qrLabel: 'QR code',
       },
-      disclaimer: 'Monster High® is a registered trademark of Mattel, which does not sponsor or endorse this website.',
+      disclaimer: 'Monster High® is a registered trademark of Mattel. This is a fan space, with no commercial purpose or endorsement by the brand.',
     },
   };
 
@@ -448,16 +457,13 @@ export default function Home() {
               <svg viewBox="0 0 36 36" className="w-full h-full" aria-hidden="true">
                 <rect x="0" y="0" width="36" height="36" fill="var(--color-accent)" />
                 <path
-                  d="M18 6.5c-5.8 0-9.5 4-9.5 8.8 0 3.1 1.5 5.4 3.6 7v3.2c0 .9.7 1.6 1.6 1.6h.8v1.4c0 .7.6 1.3 1.3 1.3h.4c.7 0 1.3-.6 1.3-1.3v-1.4h1v1.4c0 .7.6 1.3 1.3 1.3h.4c.7 0 1.3-.6 1.3-1.3v-1.4h.8c.9 0 1.6-.7 1.6-1.6v-3.2c2.1-1.6 3.6-3.9 3.6-7 0-4.8-3.7-8.8-9.5-8.8z"
-                  fill="var(--color-ink)"
+                  d="M18 29.5C10 24 5.5 19 5.5 13.2 5.5 9 8.8 5.8 12.8 5.8c2.4 0 4.6 1.2 5.2 3.4.6-2.2 2.8-3.4 5.2-3.4 4 0 7.3 3.2 7.3 7.4 0 5.8-4.5 10.8-12.5 16.3z"
+                  fill="var(--color-text)"
                 />
-                <circle cx="14.2" cy="15.5" r="2.4" fill="var(--color-accent)" />
-                <circle cx="21.8" cy="15.5" r="2.4" fill="var(--color-accent)" />
-                <path d="M18 17.2l1.3 2.6h-2.6z" fill="var(--color-accent)" />
               </svg>
             </div>
             <div className="leading-none">
-              <span className="font-spooky text-lg tracking-tight text-[var(--color-text)] block">LuvysArchive</span>
+              <span className="font-whimsy text-2xl tracking-tight text-[var(--color-text)] block">LuvysArchive</span>
               <span className="text-[10px] text-[var(--color-accent)] font-semibold tracking-[0.2em] uppercase">Studio</span>
             </div>
           </a>
@@ -554,7 +560,7 @@ export default function Home() {
             {t.hero.badge}
           </motion.div>
 
-          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" transition={{ delay: 0.05 }} className="font-spooky text-4xl md:text-6xl tracking-tight text-[var(--color-text)] mb-6 leading-[1.1]">
+          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" transition={{ delay: 0.05 }} className="font-display text-4xl md:text-6xl font-semibold tracking-tight text-[var(--color-text)] mb-6 leading-[1.1]">
             {t.hero.title}
           </motion.h1>
           <motion.p variants={fadeUp} initial="hidden" animate="visible" transition={{ delay: 0.1 }} className="text-[var(--color-text-muted)] text-base md:text-lg max-w-lg mb-10 leading-relaxed">
@@ -609,6 +615,36 @@ export default function Home() {
 
       <StudDivider />
 
+      {/* REELS — tiras de video autoreproduciéndose, antes de entrar al universo */}
+      {!loading && reelItems.length > 0 && (
+        <section className="max-w-7xl mx-auto px-6 pt-4 pb-2 relative z-10">
+          <h3 className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-faint)] mb-4 text-center">
+            {t.reelsTitle}
+          </h3>
+          <div className="flex gap-4 overflow-x-auto pb-2 px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {reelItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => openItem(item)}
+                className="relative shrink-0 w-32 sm:w-40 aspect-[9/16] rounded-2xl overflow-hidden border border-[var(--color-border)] bg-black shadow-md"
+              >
+                <video
+                  src={item.videoUrl ?? undefined}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <span className="absolute bottom-2 left-2 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-black/50 backdrop-blur-sm">
+                  ▶
+                </span>
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* GALLERY */}
       <section id="gallery" ref={galleryRef} className="max-w-7xl mx-auto px-6 py-16 relative z-10 overflow-hidden">
         <motion.div
@@ -619,7 +655,7 @@ export default function Home() {
         />
         <div className="mb-12 flex flex-col items-center text-center gap-6">
           <div>
-            <motion.h2 initial={{ opacity: 0, y: -10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-spooky text-3xl md:text-4xl tracking-tight text-[var(--color-text)]">
+            <motion.h2 initial={{ opacity: 0, y: -10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-display text-3xl md:text-4xl font-semibold tracking-tight text-[var(--color-text)]">
               {t.gallery.title}
             </motion.h2>
             <p className="text-sm text-[var(--color-text-muted)] mt-1">{t.gallery.subtitle}</p>
@@ -782,11 +818,19 @@ export default function Home() {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.95, y: 16, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto flex flex-col md:flex-row shadow-2xl"
+              className="relative bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto flex flex-col md:flex-row shadow-2xl"
             >
+              <button
+                ref={closeButtonRef}
+                onClick={closeModal}
+                aria-label={t.modal.close}
+                className="absolute top-3 left-3 z-30 w-9 h-9 flex items-center justify-center rounded-full text-white bg-black/50 border border-white/20 backdrop-blur-sm hover:bg-black/70 transition-colors"
+              >
+                ✕
+              </button>
               <div className={`w-full md:w-3/5 bg-black relative min-h-[320px] md:min-h-[480px] flex items-center justify-center ${zoomed ? 'overflow-auto' : 'overflow-hidden'}`}>
                 {filteredItems.length > 1 && !zoomed && (
-                  <span className="absolute top-3 left-3 z-20 px-2.5 py-1 rounded-full bg-black/50 text-white text-[11px] font-bold tracking-wide border border-white/20 backdrop-blur-sm tabular-nums">
+                  <span className="absolute top-3 right-3 z-20 px-2.5 py-1 rounded-full bg-black/50 text-white text-[11px] font-bold tracking-wide border border-white/20 backdrop-blur-sm tabular-nums">
                     {selectedIndex + 1} / {filteredItems.length}
                   </span>
                 )}
@@ -794,17 +838,17 @@ export default function Home() {
                   onClick={goToPrev}
                   disabled={!hasPrev || zoomed}
                   aria-label={t.modal.prev}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 text-white text-2xl leading-none border border-white/20 backdrop-blur-sm hover:bg-black/70 transition-colors disabled:opacity-0 disabled:pointer-events-none"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 text-white border border-white/20 backdrop-blur-sm hover:bg-black/70 transition-colors disabled:opacity-0 disabled:pointer-events-none"
                 >
-                  ‹
+                  <HeartIcon className="w-5 h-5" />
                 </button>
                 <button
                   onClick={goToNext}
                   disabled={!hasNext || zoomed}
                   aria-label={t.modal.next}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 text-white text-2xl leading-none border border-white/20 backdrop-blur-sm hover:bg-black/70 transition-colors disabled:opacity-0 disabled:pointer-events-none"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 text-white border border-white/20 backdrop-blur-sm hover:bg-black/70 transition-colors disabled:opacity-0 disabled:pointer-events-none"
                 >
-                  ›
+                  <HeartIcon className="w-5 h-5" />
                 </button>
                 {!selectedItem.videoUrl && !zoomed && (
                   <div
@@ -863,14 +907,6 @@ export default function Home() {
                         {favorites.has(selectedItem.id) ? '♥' : '♡'}
                       </motion.span>
                     </motion.button>
-                    <button
-                      ref={closeButtonRef}
-                      onClick={closeModal}
-                      aria-label={t.modal.close}
-                      className="w-8 h-8 flex items-center justify-center rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-text)] bg-[var(--color-surface-2)] border border-[var(--color-border)]"
-                    >
-                      ✕
-                    </button>
                   </div>
                 </div>
                 <div className="flex-1 flex flex-col items-center justify-center text-center py-6">
@@ -929,6 +965,9 @@ export default function Home() {
             <a href="https://www.instagram.com/luvy.dolls/" target="_blank" rel="noopener noreferrer" className="font-button inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--color-text)] border border-[var(--color-border)] px-6 py-3.5 rounded-full hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition whitespace-nowrap">
               {t.aboutSection.cta}
             </a>
+            <a href="https://www.tiktok.com/@luvy.dolls" target="_blank" rel="noopener noreferrer" className="font-button inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--color-text)] border border-[var(--color-border)] px-6 py-3.5 rounded-full hover:border-[var(--color-accent-3)] hover:text-[var(--color-accent-3)] transition whitespace-nowrap">
+              {t.aboutSection.ctaTiktok}
+            </a>
           </div>
         </motion.div>
       </section>
@@ -954,6 +993,7 @@ export default function Home() {
             <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-faint)] block mb-3">{t.footer.followTitle}</span>
             <div className="flex flex-col gap-2">
               <a href="https://www.instagram.com/luvy.dolls/" target="_blank" rel="noopener noreferrer" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] w-fit block">Instagram ↗</a>
+              <a href="https://www.tiktok.com/@luvy.dolls" target="_blank" rel="noopener noreferrer" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] w-fit block">TikTok ↗</a>
               <button onClick={openQr} aria-label={t.footer.qrLabel} className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] w-fit text-left">
                 {t.footer.qrLabel}
               </button>

@@ -96,7 +96,7 @@ export default function ComunidadPage() {
         es: {
             volver: '← Volver al inicio',
             pageTitle: 'Comunidad',
-            pageSubtitle: 'Comparte tus propias creaciones Monster High y descubre las de otros fans.',
+            pageSubtitle: 'Comparte tus propias fotos de muñecas y descubre las de otras coleccionistas.',
             connectedAs: 'Conectado como',
             logout: 'Cerrar sesión',
             newPostTitle: 'Nueva publicación',
@@ -146,7 +146,7 @@ export default function ComunidadPage() {
         en: {
             volver: '← Back to home',
             pageTitle: 'Community',
-            pageSubtitle: 'Share your own Monster High creations and discover other fans’.',
+            pageSubtitle: 'Share your own doll photos and discover other collectors’.',
             connectedAs: 'Logged in as',
             logout: 'Log out',
             newPostTitle: 'New post',
@@ -542,7 +542,7 @@ export default function ComunidadPage() {
 
             <div className="max-w-2xl mx-auto px-4 pt-12">
                 <div className="mb-10 text-center">
-                    <h1 className="font-spooky text-3xl md:text-4xl tracking-tight text-[var(--color-text)]">{t.pageTitle}</h1>
+                    <h1 className="font-display text-3xl md:text-4xl font-semibold tracking-tight text-[var(--color-text)]">{t.pageTitle}</h1>
                     <p className="text-sm text-[var(--color-text-muted)] mt-1">{t.pageSubtitle}</p>
                 </div>
 

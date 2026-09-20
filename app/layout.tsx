@@ -1,65 +1,61 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
-import { Space_Grotesk } from "next/font/google";
-import { Fredoka } from "next/font/google";
-import { Creepster } from "next/font/google";
+import { Quicksand } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
+import { Dancing_Script } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { FilmGrainOverlay } from "@/components/ui/FilmGrainOverlay";
-import { BackgroundSkullField } from "@/components/ui/BackgroundSkullField";
+import { BackgroundSunset } from "@/components/ui/BackgroundSunset";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+// Quicksand: redondeada y suave — texto de lectura y botones.
+const quicksand = Quicksand({
+  variable: "--font-quicksand",
   subsets: ["latin"],
   weight: ["500", "600", "700"],
 });
 
-// Fredoka: redondeada, gruesa y juguetona — reservada solo para los botones.
-const fredoka = Fredoka({
-  variable: "--font-fredoka",
+// Playfair Display: serif elegante y romántica — títulos grandes.
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
   weight: ["500", "600", "700"],
 });
 
-// Creepster: la típica tipografía "de terror de caricatura" — reservada solo
-// para titulares grandes (logo, hero), nunca para texto chico o de lectura.
-const creepster = Creepster({
-  variable: "--font-creepster",
+// Dancing Script: cursiva caprichosa — reservada para el logo y algún
+// detalle chico, nunca para texto de lectura (a tamaños chicos se vuelve
+// difícil de leer).
+const dancingScript = Dancing_Script({
+  variable: "--font-dancing-script",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["600", "700"],
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://luvysarchive.vercel.app'),
   title: {
-    default: "LuvysArchive — Fotografía de muñecas Monster High",
+    default: "LuvysArchive — Fotografía de muñecas",
     template: "%s · LuvysArchive",
   },
   description:
-    "Portafolio de fotografía de muñecas Monster High de @luvy.dolls: escenarios, iluminación cinematográfica y una comunidad para compartir tus propias creaciones.",
+    "Diario de fotografía de muñecas de @luvy.dolls: escenarios de ensueño, luz de atardecer y una comunidad para compartir tus propias creaciones.",
   openGraph: {
-    title: "LuvysArchive — Fotografía de muñecas Monster High",
+    title: "LuvysArchive — Fotografía de muñecas",
     description:
-      "Escenarios, iluminación cinematográfica y una comunidad para compartir tus creaciones Monster High.",
+      "Escenarios de ensueño, luz de atardecer y una comunidad para compartir tus creaciones.",
     siteName: "LuvysArchive",
     locale: "es_ES",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "LuvysArchive — Fotografía de muñecas Monster High",
+    title: "LuvysArchive — Fotografía de muñecas",
     description:
-      "Escenarios, iluminación cinematográfica y una comunidad para compartir tus creaciones Monster High.",
+      "Escenarios de ensueño, luz de atardecer y una comunidad para compartir tus creaciones.",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#05070c",
+  themeColor: "#f2b8d6",
 };
 
 export default function RootLayout({
@@ -71,10 +67,10 @@ export default function RootLayout({
     <html
       lang="es"
       data-scroll-behavior="smooth"
-      className={`${geistSans.variable} ${spaceGrotesk.variable} ${fredoka.variable} ${creepster.variable} h-full antialiased`}
+      className={`${quicksand.variable} ${playfair.variable} ${dancingScript.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[var(--color-ink)] text-[var(--color-text)]">
-        <BackgroundSkullField />
+        <BackgroundSunset />
         {children}
         <FilmGrainOverlay />
         <Analytics />

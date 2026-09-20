@@ -5,12 +5,8 @@
 export type CategoryTheme = { accent: string; shadow: string; ink: string };
 
 export const CATEGORY_THEMES: Record<string, CategoryTheme> = {
-  draculaura: { accent: '#E0245E', shadow: '#8a1638', ink: '#ffffff' },
-  clawdeen: { accent: '#F2A93B', shadow: '#8a5c14', ink: '#1a1300' },
-  frankie: { accent: '#39E639', shadow: '#1f7a1f', ink: '#0a1a00' },
-  lagoona: { accent: '#22C1D6', shadow: '#0f6b78', ink: '#ffffff' },
-  cleo: { accent: '#D4AF37', shadow: '#7a611a', ink: '#1a1300' },
-  otros: { accent: '#8B7CF6', shadow: '#4f4499', ink: '#ffffff' },
+  'monster high': { accent: '#D8B4E2', shadow: '#B98FC7', ink: '#5b3a5c' },
+  'mirror mi': { accent: '#B8E0F5', shadow: '#8EC7E8', ink: '#345b6e' },
 };
 
 /** Claves en minúscula, en el orden en que se muestran los selectores/filtros. */

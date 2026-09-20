@@ -3,37 +3,37 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-display: var(--font-space-grotesk);
-  --font-button: var(--font-fredoka);
-  --font-spooky: var(--font-creepster);
+  --font-sans: var(--font-quicksand);
+  --font-display: var(--font-playfair);
+  --font-button: var(--font-quicksand);
+  --font-whimsy: var(--font-dancing-script);
 
-  /* Fondo — estudio fotográfico gótico-glam, negro con base violeta */
-  --color-ink: #0a0612;
-  --color-surface: #190f24;
-  --color-surface-2: #23142f;
-  --color-border: #3a2145;
-  --color-text: #f8f4fb;
-  --color-text-muted: #b79dc9;
-  --color-text-faint: #7a6389;
+  /* Fondo — estética coquette pastel, sobre un cielo de atardecer */
+  --color-ink: #fff6fa;
+  --color-surface: #ffffff;
+  --color-surface-2: #fdeef5;
+  --color-border: #f3d9e6;
+  --color-text: #6b4c6e;
+  --color-text-muted: #a98bae;
+  --color-text-faint: #c9afd1;
 
-  /* Acentos — paleta Monster High: rosa Draculaura, morado eléctrico, verde Frankie */
-  --color-accent: #ff2d78;    /* Rosa fucsia — color principal */
-  --color-accent-2: #e0243d; /* Rojo sangre — borrar/errores */
-  --color-accent-3: #8b2fe0;  /* Morado eléctrico */
-  --color-accent-4: #39e639;  /* Verde tóxico */
-  --color-accent-ink: #ffffff; /* texto sobre el acento principal */
+  /* Acentos — paleta pastel: rosa, lavanda, menta, coral */
+  --color-accent: #ffafcf;    /* Rosa pastel — color principal */
+  --color-accent-2: #ff9aa2; /* Coral pastel — borrar/errores */
+  --color-accent-3: #c3b1e1;  /* Lavanda pastel */
+  --color-accent-4: #b5ead7;  /* Menta pastel */
+  --color-accent-ink: #6b4c6e; /* texto sobre el acento principal (oscuro, para contraste sobre pastel) */
 
   /* Sombra "de canto" de cada acento, para el efecto de placa/sticker */
-  --shadow-accent: #8f1a49;
-  --shadow-accent-2: #7a1322;
-  --shadow-accent-3: #4c1a8f;
-  --shadow-accent-4: #1f7a1f;
+  --shadow-accent: #f48fb1;
+  --shadow-accent-2: #f4777f;
+  --shadow-accent-3: #a78bc9;
+  --shadow-accent-4: #8fd9be;
 }
 
 :root {
-  --background: #0a0612;
-  --foreground: #f8f4fb;
+  --background: #fff6fa;
+  --foreground: #6b4c6e;
 }
 
 * {
@@ -63,11 +63,10 @@ button {
   font-family: var(--font-button);
 }
 
-/* Tipografía "de terror de caricatura" — solo para titulares grandes (logo,
-   hero); a tamaños chicos se vuelve ilegible, nunca usar en texto de lectura. */
-.font-spooky {
-  font-family: var(--font-spooky);
-  letter-spacing: 0.02em;
+/* Cursiva caprichosa — solo para el logo y detalles chicos; a tamaños
+   chicos de texto corrido se vuelve difícil de leer. */
+.font-whimsy {
+  font-family: var(--font-whimsy);
 }
 
 /* Enfoque visible consistente para navegación por teclado */

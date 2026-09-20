@@ -11,12 +11,12 @@ const SITE_URL = 'https://luvysarchive.vercel.app';
 // se usan en el resto del sitio (acentos base + un par de temas de
 // categoría), nada inventado para esta pieza.
 export const QR_BRICK_COLORS = [
-  { name: 'Rojo', accent: '#b3382c', shadow: '#6e2019' },
-  { name: 'Naranja', accent: '#e0791f', shadow: '#8a4d0f' },
-  { name: 'Azul', accent: '#006cb7', shadow: '#003f5c' },
-  { name: 'Verde', accent: '#00852b', shadow: '#004d1a' },
-  { name: 'Dorado', accent: '#E8B923', shadow: '#8a6e14' },
-  { name: 'Morado', accent: '#8B7CF6', shadow: '#4f4499' },
+  { name: 'Rosa', accent: '#FFAFCF', shadow: '#F48FB1' },
+  { name: 'Coral', accent: '#FF9AA2', shadow: '#F4777F' },
+  { name: 'Lavanda', accent: '#C3B1E1', shadow: '#A78BC9' },
+  { name: 'Menta', accent: '#B5EAD7', shadow: '#8FD9BE' },
+  { name: 'Durazno', accent: '#FFD3B0', shadow: '#F5B380' },
+  { name: 'Cielo', accent: '#B8E0F5', shadow: '#8EC7E8' },
 ] as const;
 
 const MODULE = 10;
@@ -161,12 +161,9 @@ export function QrCodeModal({
                 <rect x={logoX} y={logoY} width={logoSize} height={logoSize} rx={logoSize * 0.22} fill={color.accent} />
                 <g transform={`translate(${logoX}, ${logoY}) scale(${logoSize / 36})`}>
                   <path
-                    d="M18 6.5c-5.8 0-9.5 4-9.5 8.8 0 3.1 1.5 5.4 3.6 7v3.2c0 .9.7 1.6 1.6 1.6h.8v1.4c0 .7.6 1.3 1.3 1.3h.4c.7 0 1.3-.6 1.3-1.3v-1.4h1v1.4c0 .7.6 1.3 1.3 1.3h.4c.7 0 1.3-.6 1.3-1.3v-1.4h.8c.9 0 1.6-.7 1.6-1.6v-3.2c2.1-1.6 3.6-3.9 3.6-7 0-4.8-3.7-8.8-9.5-8.8z"
+                    d="M18 29.5C10 24 5.5 19 5.5 13.2 5.5 9 8.8 5.8 12.8 5.8c2.4 0 4.6 1.2 5.2 3.4.6-2.2 2.8-3.4 5.2-3.4 4 0 7.3 3.2 7.3 7.4 0 5.8-4.5 10.8-12.5 16.3z"
                     fill={INK}
                   />
-                  <circle cx="14.2" cy="15.5" r="2.4" fill={color.accent} />
-                  <circle cx="21.8" cy="15.5" r="2.4" fill={color.accent} />
-                  <path d="M18 17.2l1.3 2.6h-2.6z" fill={color.accent} />
                 </g>
               </svg>
             </div>
